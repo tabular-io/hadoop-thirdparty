@@ -23,7 +23,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.hadoop.thirdparty</groupId>
   <artifactId>hadoop-thirdparty</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.1-tabular</version>
   <parent>
     <groupId>org.apache</groupId>
     <artifactId>apache</artifactId>
@@ -80,12 +80,12 @@
     <!-- define the Java language version used by the compiler -->
     <javac.version>1.8</javac.version>
 
-    <distMgmtSnapshotsId>apache.snapshots.https</distMgmtSnapshotsId>
-    <distMgmtSnapshotsName>Apache Development Snapshot Repository</distMgmtSnapshotsName>
-    <distMgmtSnapshotsUrl>https://repository.apache.org/content/repositories/snapshots</distMgmtSnapshotsUrl>
-    <distMgmtStagingId>apache.staging.https</distMgmtStagingId>
-    <distMgmtStagingName>Apache Release Distribution Repository</distMgmtStagingName>
-    <distMgmtStagingUrl>https://repository.apache.org/service/local/staging/deploy/maven2</distMgmtStagingUrl>
+    <distMgmtSnapshotsId>tabular.s3.snapshot</distMgmtSnapshotsId>
+    <distMgmtSnapshotsName>Tabular Snapshot Repository</distMgmtSnapshotsName>
+    <distMgmtSnapshotsUrl>s3://tabular-repository/snapshots</distMgmtSnapshotsUrl>
+    <distMgmtStagingId>tabular.s3.release</distMgmtStagingId>
+    <distMgmtStagingName>Tabular Release Repository</distMgmtStagingName>
+    <distMgmtStagingUrl>s3://tabular-repository-public/releases</distMgmtStagingUrl>
 
     <!-- platform encoding override -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -95,7 +95,7 @@
     <shaded.prefix>org.apache.hadoop.thirdparty</shaded.prefix>
     <protobuf.shade.prefix>${shaded.prefix}.protobuf</protobuf.shade.prefix>
     <protobuf_3_7.version>3.7.1</protobuf_3_7.version>
-    <guava.version>30.1.1-jre</guava.version>
+    <guava.version>32.1.1-jre</guava.version>
 
     <!-- maven plugin versions -->
     <maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
@@ -127,6 +127,15 @@
   </modules>
 
   <build>
+
+    <extensions>
+      <extension>
+        <groupId>com.github.seahen</groupId>
+        <artifactId>maven-s3-wagon</artifactId>
+        <version>1.3.3</version>
+      </extension>
+    </extensions>
+
     <pluginManagement>
       <plugins>
         <plugin>
